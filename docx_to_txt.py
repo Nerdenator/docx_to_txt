@@ -29,7 +29,7 @@ def extract_zipfile(source_zip):
     # unzip the .zip
     zip_ref = zipfile.ZipFile(source_zip, 'r')
     zip_ref.extractall('./temp')
-    return zip_ref  # do we want to return a file path?
+    return zip_ref # the zip ref object will need to be closed later.
 
 
 def parse_xml_t_elements_to_list(source_xml_file):
@@ -39,7 +39,7 @@ def parse_xml_t_elements_to_list(source_xml_file):
     :return: result list. contains each :t element as an individual item in the list
     """
     data = etree.parse(source_xml_file)
-    # we'll want to go over all 'p' elements in the xml node tree.
+    # we'll want to go over all 't' elements in the xml node tree.
     # note that MS office uses namespaces and that the w must be defined in the namespaces dictionary args
     # each :t element is the "text" of the file. that's what we're looking for
     # result is a list filled with the text of each t node in the xml document model
@@ -58,13 +58,13 @@ def write_node_list_to_txt_file(node_list, source_zip_dir, zip_manipulator):
     :param zip_manipulator: the zip file manipulator object
     :return: None.
     """
-    # dump result into a new .txt file
+    # dump node_list into a new .txt file
     with open(os.path.splitext(source_zip_dir)[0] + '.txt', 'w') as txt:
-        # join the elements of result together since txt.write can't take lists
+        # join the elements of node_list together since txt.write can't take lists
         joined_node_str = '\n'.join(node_list)
         # write it into the new file
         txt.write(joined_node_str)
-    # close the zip_ref file
+    # close the zip_manipulator file
     zip_manipulator.close()
     return None
 
