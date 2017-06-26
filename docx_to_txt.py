@@ -35,4 +35,9 @@ rmtree('./temp')
 os.remove(zip_dir_zip_ext)
 
 
+def prepare_zipfile(source_file):
+    # cut off the .docx, make it a .zip
+    dest_zip = os.path.splitext(source_file)[0] + '.zip'
+    # make a copy of the .docx and put it in .zip
+    copyfile(source_file, dest_zip)
 
