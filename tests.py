@@ -82,7 +82,7 @@ class TestDocxToTxt(unittest.TestCase):
         """
         pass
 
-    def try_to_open_excel_workbook(self):
+    def test_try_to_open_excel_workbook(self):
         """
         ew excel. say no to opening it
         :return:
